@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sai</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+<div ng-controller="LevelA">
+<h3>{{title}}</h3>
+ValueA={{valueA}}<br>
+<input type="button" ng-click="inc()" value="+"/>
+
+<div ng-controller="LevelB">
+<h3>{{title}}</h3>
+ValueA={{valueA}}<br>
+ValueB={{valueB}}
+<input type="button" ng-click="inc()" value="+"/>
+
+<div ng-controller="LevelC">
+<h3>{{title}}</h3>
+ValueA={{valueA}}<br>
+ValueB={{valueB}}<br>
+ValueC={{valueC}}
+<input type="button" ng-click="inc()" value="+"/>
+</div>
+</div>
+</div>
+<script src="http://code.angularjs.org/1..0/angular.min.js"></script>
+<script type="js/scope_hierarchy.js"></script>
+  <app-root></app-root>
+</body>
+</html>
