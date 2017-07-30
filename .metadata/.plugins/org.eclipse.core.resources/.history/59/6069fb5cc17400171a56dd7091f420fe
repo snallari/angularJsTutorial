@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<title>List</title>
+<style>
+span {
+	color: red;
+	cursor: pointer;
+}
+
+.myList {
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+}
+}
+</style>
+</head>
+<body>
+	<div ng-controller="mycontroller">
+		<input type="button" ng-click="resetStore()" value="Restock store" />
+		{{status}}
+		<hr>
+		<div class="myList">
+			<h3>The Store</h3>
+			<div ng-repeat="(item,count) in storeItems"></div>
+			{{item}} ({{count}}) [<span ng-click="buyItem(item)">buy</span>]
+		</div>
+	</div>
+	
+<script>
+angular.module('myApp', []).controller('mycontroller', [ '$scope', '$http', function($scope, $http) {
+	$scope.storeitems = {};
+	$scope.kitchenitems = {};
+	$scope.status = "";
+	$scope.resetStore = function() {
+		$scope.status = ";"
+		$http.get('/reset/data').success(function(data, status, headers, config) {
+			$scope.storeitems = data;
+		}).error(function(data, status, headers, config) {
+			$scope.status = data;
+		});
+	};
+	$scope.buyItem = function(buyItem) {
+		$http.post('/buy/item', {
+			item : buyItem
+		}).success(function(data, status, headers, config) {
+			$scope.storeitems = data;
+			if ($scope.kitchenitems.hasOwnProperty(buyItem)) {
+				$scope.kitchenitems[buyItem] += 1;
+			} else {
+				$scope.kitchenitems[buyItem] = 1;
+				$scope.status = "Purchased" + buyItem;
+			}
+		}).error(function(data, status, headers, config) {
+			$scope.status = data.msg;
+		});
+	};
+	$scope.useItem = function(useItem) {
+		if ($scope.kitchenitems[useItem] > 0) {
+			$scope.kitchenitems[useItem] -= 1;
+		}
+	};
+
+} ]);
+</script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</body>
+</html>
