@@ -1,35 +1,41 @@
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>List</title>
-        <style>
-        span{
-        color:red; cursor:pointer;
-        }.myList{
-        display:inline-block; width:200px; vertical-align:top;}
-        }
-        </style>
-    </head>
-    <body>
-        <div ng-controller="mycontroller">
-        <input type="button" ng-click="resetStore()" value="Restock store"/>
-        {{status}}
-        <hr>
-        <div class="myList">
-        <h3>The Store</h3>
-        <div ng-repeat="(item,count) in storeItems"></div>
-        {{item}} ({{count}})
-        [<span ng-click="buyItem(item)">buy</span>]
-        </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/service_http.js"></script>
-        <script type="text/javascript">
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<title>List</title>
+<style>
+span {
+	color: red;
+	cursor: pointer;
+}
+
+.myList {
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+}
+}
+</style>
+</head>
+<body>
+	<div ng-controller="mycontroller">
+		<input type="button" ng-click="resetStore()" value="Restock store" />
+		{{status}}
+		<hr>
+		<div class="myList">
+			<h3>The Store</h3>
+			<div ng-repeat="(item,count) in storeItems"></div>
+			{{item}} ({{count}}) [<span ng-click="buyItem(item)">buy</span>]
+		</div>
+	</div>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/service_http.js"></script>
+	<script type="text/javascript">
             app.initialize();
         </script>
-    </body>
+</body>
 </html>
